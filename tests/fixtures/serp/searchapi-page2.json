@@ -1,0 +1,63 @@
+{
+ "_note": "SYNTHETIC: собрано по структуре из docs searchapi.io/docs/google (2026-11-10). Заменить реальным ответом после первого реального запроса.",
+ "search_metadata": {
+  "id": "search_fixture_2",
+  "status": "Success"
+ },
+ "organic_results": [
+  {
+   "position": 1,
+   "title": "Duplicate of page 1",
+   "link": "https://www.covers.com/ca/casino/",
+   "source": "covers.com",
+   "domain": "covers.com",
+   "displayed_link": "https://covers.com",
+   "snippet": "Duplicate of page 1 — snippet text for covers.com."
+  },
+  {
+   "position": 2,
+   "title": "Casino Canada — Online Casino Guide",
+   "link": "https://www.casinocanada.com/",
+   "source": "casinocanada.com",
+   "domain": "casinocanada.com",
+   "displayed_link": "https://casinocanada.com",
+   "snippet": "Casino Canada — Online Casino Guide — snippet text for casinocanada.com."
+  },
+  {
+   "position": 3,
+   "title": "Interac",
+   "link": "https://www.interac.ca/en/",
+   "source": "interac.ca",
+   "domain": "interac.ca",
+   "displayed_link": "https://interac.ca",
+   "snippet": "Interac — snippet text for interac.ca."
+  },
+  {
+   "position": 4,
+   "title": "AGCO lottery and gaming",
+   "link": "https://www.agco.ca/en/lottery-and-gaming",
+   "source": "agco.ca",
+   "domain": "agco.ca",
+   "displayed_link": "https://agco.ca",
+   "snippet": "AGCO lottery and gaming — snippet text for agco.ca."
+  },
+  {
+   "position": 5,
+   "title": "Example Casino - Apps on Google Play",
+   "link": "https://play.google.com/store/apps/details?id=com.example.casino",
+   "source": "play.google.com",
+   "domain": "play.google.com",
+   "displayed_link": "https://play.google.com",
+   "snippet": "Example Casino - Apps on Google Play — snippet text for play.google.com."
+  },
+  {
+   "position": 6,
+   "title": "Overflow item #11",
+   "link": "https://www.oddschecker.com/ca/casino",
+   "source": "oddschecker.com",
+   "domain": "oddschecker.com",
+   "displayed_link": "https://oddschecker.com",
+   "snippet": "Overflow item #11 — snippet text for oddschecker.com."
+  }
+ ]
+}

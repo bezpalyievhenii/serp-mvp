@@ -1,0 +1,97 @@
+{
+ "_note": "SYNTHETIC: собрано по структуре из docs searchapi.io/docs/google (2026-11-10). Заменить реальным ответом после первого реального запроса.",
+ "search_metadata": {
+  "id": "search_fixture_1",
+  "status": "Success"
+ },
+ "search_parameters": {
+  "engine": "google",
+  "q": "online casino canada",
+  "device": "mobile",
+  "gl": "ca",
+  "hl": "en",
+  "location": "Canada"
+ },
+ "organic_results": [
+  {
+   "position": 1,
+   "title": "Best Online Casinos in Canada 2026",
+   "link": "https://www.casino.org/ca/?utm_source=google&utm_medium=organic",
+   "source": "casino.org",
+   "domain": "casino.org",
+   "displayed_link": "https://casino.org",
+   "snippet": "Best Online Casinos in Canada 2026 — snippet text for casino.org."
+  },
+  {
+   "position": 2,
+   "title": "Best Canadian Online Casinos",
+   "link": "https://www.covers.com/ca/casino/",
+   "source": "covers.com",
+   "domain": "covers.com",
+   "displayed_link": "https://covers.com",
+   "snippet": "Best Canadian Online Casinos — snippet text for covers.com."
+  },
+  {
+   "position": 3,
+   "title": "Best site? : r/onlinecasinocanada",
+   "link": "https://www.reddit.com/r/onlinecasinocanada/comments/abc/best_site/",
+   "source": "reddit.com",
+   "domain": "reddit.com",
+   "displayed_link": "https://reddit.com",
+   "snippet": "Best site? : r/onlinecasinocanada — snippet text for reddit.com."
+  },
+  {
+   "position": 4,
+   "title": "Regulated iGaming market",
+   "link": "https://www.google.com/goto?url=https://www.igamingontario.ca/en/player/regulated-igaming-market%23frag",
+   "source": "igamingontario.ca",
+   "domain": "igamingontario.ca",
+   "displayed_link": "https://igamingontario.ca",
+   "snippet": "Regulated iGaming market — snippet text for igamingontario.ca."
+  },
+  {
+   "position": 5,
+   "title": "Best online casinos in Canada",
+   "link": "https://www.thestar.com/sponsored/casino/best-online-casinos-canada.html",
+   "source": "thestar.com",
+   "domain": "thestar.com",
+   "displayed_link": "https://thestar.com",
+   "snippet": "Best online casinos in Canada — snippet text for thestar.com."
+  },
+  {
+   "position": 6,
+   "title": "Duplicate after normalization",
+   "link": "https://WWW.Casino.org/ca/#top",
+   "source": "casino.org",
+   "domain": "casino.org",
+   "displayed_link": "https://casino.org",
+   "snippet": "Duplicate after normalization — snippet text for casino.org."
+  },
+  {
+   "position": 7,
+   "title": "Jackpot City Casino Canada",
+   "link": "https://www.jackpotcity.com/en-ca/?gclid=abc123",
+   "source": "jackpotcity.com",
+   "domain": "jackpotcity.com",
+   "displayed_link": "https://jackpotcity.com",
+   "snippet": "Jackpot City Casino Canada — snippet text for jackpotcity.com."
+  },
+  {
+   "position": 8,
+   "title": "No link item"
+  },
+  {
+   "position": 9,
+   "title": "Online gambling in Canada - Wikipedia",
+   "link": "https://en.wikipedia.org/wiki/Online_gambling_in_Canada",
+   "source": "wikipedia.org",
+   "domain": "wikipedia.org",
+   "displayed_link": "https://wikipedia.org",
+   "snippet": "Online gambling in Canada - Wikipedia — snippet text for wikipedia.org."
+  }
+ ],
+ "pagination": {
+  "current": 1,
+  "next": "https://www.google.ca/search?q=online+casino+canada&start=10"
+ }
+}

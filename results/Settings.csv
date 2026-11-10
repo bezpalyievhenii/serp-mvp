@@ -1,0 +1,7 @@
+﻿key,value,description
+schedule_cron,0 7 * * *,"Ежедневный прогон, 07:00 по timezone"
+timezone,America/Toronto,Часовой пояс дат прогона и расписания
+relabel_days,30,Через сколько дней переразмечать URL
+max_run_cost_usd,2,Лимит расходов на LLM за прогон
+lock_run_id,,Служебное: id идущего прогона
+lock_expires_at,,Служебное: когда истекает блокировка

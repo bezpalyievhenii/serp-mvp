@@ -1,0 +1,89 @@
+{
+ "_note": "SYNTHETIC: по структуре из docs.hasdata.com/apis/google-serp-api (2026-11-10).",
+ "requestMetadata": {
+  "status": "ok",
+  "id": "fixture"
+ },
+ "organicResults": [
+  {
+   "position": 1,
+   "title": "Result 1",
+   "link": "https://site1.example.ca/page/",
+   "displayedLink": "https://site1.example.ca › page",
+   "source": "Site 1",
+   "snippet": "Snippet 1"
+  },
+  {
+   "position": 2,
+   "title": "Result 2",
+   "link": "https://site2.example.ca/page/",
+   "displayedLink": "https://site2.example.ca › page",
+   "source": "Site 2",
+   "snippet": "Snippet 2"
+  },
+  {
+   "position": 3,
+   "title": "Result 3",
+   "link": "https://site3.example.ca/page/",
+   "displayedLink": "https://site3.example.ca › page",
+   "source": "Site 3",
+   "snippet": "Snippet 3"
+  },
+  {
+   "position": 4,
+   "title": "Result 4",
+   "link": "https://site4.example.ca/page/",
+   "displayedLink": "https://site4.example.ca › page",
+   "source": "Site 4",
+   "snippet": "Snippet 4"
+  },
+  {
+   "position": 5,
+   "title": "Result 5",
+   "link": "https://site5.example.ca/page/",
+   "displayedLink": "https://site5.example.ca › page",
+   "source": "Site 5",
+   "snippet": "Snippet 5"
+  },
+  {
+   "position": 6,
+   "title": "Result 6",
+   "link": "https://site6.example.ca/page/",
+   "displayedLink": "https://site6.example.ca › page",
+   "source": "Site 6",
+   "snippet": "Snippet 6"
+  },
+  {
+   "position": 7,
+   "title": "Result 7",
+   "link": "https://site7.example.ca/page/",
+   "displayedLink": "https://site7.example.ca › page",
+   "source": "Site 7",
+   "snippet": "Snippet 7"
+  },
+  {
+   "position": 8,
+   "title": "Result 8",
+   "link": "https://site8.example.ca/page/",
+   "displayedLink": "https://site8.example.ca › page",
+   "source": "Site 8",
+   "snippet": "Snippet 8"
+  },
+  {
+   "position": 9,
+   "title": "Result 9",
+   "link": "https://site9.example.ca/page/",
+   "displayedLink": "https://site9.example.ca › page",
+   "source": "Site 9",
+   "snippet": "Snippet 9"
+  },
+  {
+   "position": 10,
+   "title": "Result 10",
+   "link": "https://site10.example.ca/page/",
+   "displayedLink": "https://site10.example.ca › page",
+   "source": "Site 10",
+   "snippet": "Snippet 10"
+  }
+ ]
+}

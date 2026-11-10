@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SERP MVP</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">10</div>
+        <div>
+          <div class="brand-title" data-i18n="app.title"></div>
+          <div class="brand-sub" data-i18n="app.subtitle"></div>
+        </div>
+      </div>
+      <nav class="tabs" id="tabs" role="tablist">
+        <a href="#sites" data-tab="sites" data-i18n="nav.sites"></a>
+        <a href="#history" data-tab="history" data-i18n="nav.history"></a>
+        <a href="#keywords" data-tab="keywords" data-i18n="nav.keywords"></a>
+        <a href="#runs" data-tab="runs" data-i18n="nav.runs"></a>
+        <a href="#schedule" data-tab="schedule" data-i18n="nav.schedule"></a>
+      </nav>
+      <div class="top-actions">
+        <span class="run-indicator" id="run-indicator" hidden></span>
+        <a class="btn btn-ghost" id="sheet-link" target="_blank" rel="noopener" data-i18n="app.openSheet"></a>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="ru">RU</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+      </div>
+    </header>
+    <div class="demo-banner" id="demo-banner" hidden data-i18n="app.demo"></div>
+    <main id="view" class="view" aria-live="polite"></main>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
