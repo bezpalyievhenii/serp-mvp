@@ -152,7 +152,7 @@ export async function startServer(opts: ServerOptions) {
   });
 
   const server = app.listen(opts.port, '127.0.0.1', () => {
-    log.info(`Интерфейс: http://localhost:${opts.port}${opts.demo ? '  (демо-режим: данные из фикстур, таблица не меняется)' : ''}`);
+    log.info(`Интерфейс: http://127.0.0.1:${opts.port}${opts.demo ? '  (демо-режим: данные из фикстур, таблица не меняется)' : ''}`);
   });
   server.on('error', (e: NodeJS.ErrnoException) => {
     if (e.code === 'EADDRINUSE') log.error(`Порт ${opts.port} уже занят другой программой. Запустите на другом: PORT=${opts.port + 5} npm run serve`);

@@ -20,7 +20,7 @@ const HELP = `Использование:
   npm run run -- --refresh      запросить выдачу заново, даже если сегодняшний снимок уже есть
   npm run run -- --dry-run      полностью офлайн: память вместо таблицы, выдача из фикстур (или --from-cache)
   npm run export                CSV и XLSX всех листов в results/
-  npm run serve                 веб-интерфейс менеджера и расписание (http://localhost:3000)
+  npm run serve                 веб-интерфейс менеджера и расписание (http://127.0.0.1:3000)
   npm run serve -- --demo       интерфейс на демо-данных из фикстур, без ключей и без таблицы`;
 
 async function setup(): Promise<number> {

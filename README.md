@@ -17,7 +17,7 @@ cp .env.example .env      # ключи SearchApi и Anthropic, ID таблицы
 npm run doctor            # проверит всё и скажет, что исправить
 npm run setup             # создаст листы, заголовки, настройки и 10 стартовых ключей
 npm run run               # прогон: выдача → Sheets → разметка
-npm run serve             # приложение: http://localhost:3000 (порт занят: PORT=3005; без ключей: -- --demo)
+npm run serve             # приложение: http://127.0.0.1:3000 (порт занят: PORT=3005; без ключей: -- --demo)
 ```
 Ключи, прогоны, расписание и результаты — в приложении; автозапуск по расписанию по умолчанию выключен и включается во вкладке «Расписание». Другие команды: `npm test` (офлайн), `npm run export` (CSV + XLSX в `results/`), `npm run run -- --dry-run | --from-cache | --refresh | --no-label | --relabel`. Для сервера — системный cron: `0 7 * * * cd /opt/serp-mvp && npm run run >> run.log 2>&1`.
 
