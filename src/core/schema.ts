@@ -33,6 +33,8 @@ export const SHEET_KEYS = {
 
 export const SETTINGS_DEFAULTS: Record<string, { value: string; description: string }> = {
   schedule_cron: { value: '0 7 * * *', description: 'Ежедневный прогон, 07:00 по timezone' },
+  // По умолчанию выключено: автозапуск тратит SERP-квоту и деньги на LLM, включает менеджер сам.
+  schedule_enabled: { value: 'FALSE', description: 'Автозапуск по расписанию: TRUE — включён, FALSE — только вручную' },
   timezone: { value: 'America/Toronto', description: 'Часовой пояс дат прогона и расписания' },
   relabel_days: { value: '30', description: 'Через сколько дней переразмечать URL' },
   max_run_cost_usd: { value: '2', description: 'Лимит расходов на LLM за прогон' },

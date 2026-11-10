@@ -22,10 +22,15 @@ export function describeCron(expr: string, timezone: string, count = 3): { valid
 
 export class SettingsError extends Error {}
 
-export async function setSchedule(store: Store, cron: string): Promise<Settings> {
-  const expr = cron.trim();
+/** Меняет cron и/или включатель автозапуска. Включить можно только с корректным cron. */
+export async function setSchedule(store: Store, patch: { cron?: string; enabled?: boolean }): Promise<Settings> {
   const s = await getSettings(store);
+  const expr = patch.cron === undefined ? s.schedule_cron : patch.cron.trim();
+  const enabled = patch.enabled ?? s.schedule_enabled;
   if (expr !== '' && !describeCron(expr, s.timezone).valid) throw new SettingsError('invalid_cron');
-  await store.upsert('Settings', settingRows({ schedule_cron: expr }), SHEET_KEYS.Settings);
-  return { ...s, schedule_cron: expr };
+  if (enabled && expr === '') throw new SettingsError('empty_cron');
+  const rows: Record<string, string> = { schedule_enabled: enabled ? 'TRUE' : 'FALSE' };
+  if (patch.cron !== undefined) rows.schedule_cron = expr;
+  await store.upsert('Settings', settingRows(rows), SHEET_KEYS.Settings);
+  return { ...s, schedule_cron: expr, schedule_enabled: enabled };
 }

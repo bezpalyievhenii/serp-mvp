@@ -444,12 +444,38 @@ function fillSchedule(box, s) {
   const input = h('input', { class: 'mono', value: s.cron, placeholder: '0 7 * * *', 'aria-label': t('schedule.cron') });
   const preview = h('div');
   const fmt = new Intl.DateTimeFormat(state.lang === 'ru' ? 'ru-RU' : 'en-CA', { timeZone: s.timezone, dateStyle: 'medium', timeStyle: 'short' });
+  let enabled = Boolean(s.enabled);
   const showPreview = (p, cron) => {
     if (!cron.trim()) return preview.replaceChildren(h('p', { class: 'muted' }, t('schedule.off')));
     if (!p.valid) return preview.replaceChildren(h('p', { class: 'error-text' }, `${t('schedule.invalid')}: ${p.error ?? ''}`));
-    preview.replaceChildren(h('div', { class: 'muted', style: 'font-size:12px;margin-top:10px' }, t('schedule.next')),
-      h('ul', { class: 'next-runs' }, p.next.map((d) => h('li', {}, fmt.format(new Date(d))))));
+    preview.replaceChildren(h('div', { class: 'muted', style: 'font-size:12px;margin-top:10px' }, t(enabled ? 'schedule.next' : 'schedule.ifEnabled')),
+      h('ul', { class: 'next-runs' + (enabled ? '' : ' muted') }, p.next.map((d) => h('li', {}, fmt.format(new Date(d))))));
   };
+
+  // Включатель автозапуска: по умолчанию выключен, чтобы прогоны сами не тратили квоту и деньги.
+  const status = h('div', { class: 'schedule-status' });
+  const showStatus = (nextRun) => {
+    status.className = 'schedule-status ' + (enabled ? 'on' : 'off');
+    status.replaceChildren(
+      enabled
+        ? `${t('schedule.on')}${nextRun ? ` · ${t('schedule.nextRun')}: ${fmt.format(new Date(nextRun))}` : ''}`
+        : t('schedule.offManual'),
+    );
+  };
+  const toggle = h('input', { type: 'checkbox', checked: enabled, 'aria-label': t('schedule.autorun') });
+  toggle.addEventListener('change', async () => {
+    const want = toggle.checked;
+    try {
+      const r = await api('/api/schedule', { method: 'PUT', body: { enabled: want } });
+      enabled = r.enabled;
+      showStatus(r.nextRun);
+      showPreview(await api(`/api/schedule/preview?cron=${encodeURIComponent(input.value)}`), input.value);
+      toast(t(enabled ? 'schedule.enabledToast' : 'schedule.disabledToast'));
+    } catch (e) {
+      toggle.checked = !want;
+      toast(e.code === 'empty_cron' ? t('schedule.emptyCron') : e.code === 'invalid_cron' ? t('schedule.invalid') : e.message, true);
+    }
+  });
   let timer;
   const refresh = () => {
     clearTimeout(timer);
@@ -459,13 +485,17 @@ function fillSchedule(box, s) {
   const presets = [['schedule.preset.daily7', '0 7 * * *'], ['schedule.preset.twice', '0 7,19 * * *'], ['schedule.preset.weekdays', '0 8 * * 1-5']];
   const save = async () => {
     try {
-      await api('/api/schedule', { method: 'PUT', body: { cron: input.value } });
+      const r = await api('/api/schedule', { method: 'PUT', body: { cron: input.value } });
+      showStatus(r.nextRun);
       toast(t('schedule.saved'));
     } catch (e) {
-      toast(e.code === 'invalid_cron' ? t('schedule.invalid') : e.message, true);
+      toast(e.code === 'empty_cron' ? t('schedule.emptyCron') : e.code === 'invalid_cron' ? t('schedule.invalid') : e.message, true);
     }
   };
   box.replaceChildren(
+    h('div', { class: 'schedule-toggle' },
+      h('label', { class: 'switch' }, toggle, h('span')),
+      h('div', {}, h('div', { style: 'font-weight:600' }, t('schedule.autorun')), status)),
     h('div', { class: 'toolbar', style: 'margin:0' },
       h('div', { class: 'field grow' }, h('label', {}, t('schedule.cron')), input),
       h('div', { class: 'field' }, h('label', {}, t('schedule.timezone')), h('input', { value: s.timezone, disabled: true })),
@@ -474,6 +504,7 @@ function fillSchedule(box, s) {
     h('div', { class: 'presets' }, presets.map(([k, cron]) => h('button', { class: 'btn btn-ghost btn-sm', type: 'button', onclick: () => { input.value = cron; refresh(); } }, t(k)))),
     preview,
   );
+  showStatus(s.nextRun);
   showPreview(s.preview, s.cron);
 }
 

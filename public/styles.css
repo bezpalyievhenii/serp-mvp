@@ -171,3 +171,9 @@ tr.inactive td { opacity: 0.55; }
 
 /* поля ввода в таблице ключей */
 td input:not([type=checkbox]) { width: 100%; min-width: 180px; }
+
+/* включатель автозапуска */
+.schedule-toggle { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--border); }
+.schedule-status { font-size: 13px; margin-top: 2px; }
+.schedule-status.on { color: var(--ok); }
+.schedule-status.off { color: var(--muted); }

@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { KeywordError, addKeyword, listKeywords, nextKeywordId, updateKeyword } from '../src/core/keywords';
 import { SettingsError, describeCron, getSettings, setSchedule } from '../src/core/settings';
-import { freshStore } from './helpers';
+import { freshStore, quietLog } from './helpers';
+import { Scheduler } from '../src/interfaces/http/scheduler';
 
 const now = new Date('2026-11-10T15:00:00Z');
 
@@ -36,14 +37,14 @@ describe('сервис ключей', () => {
 describe('расписание', () => {
   it('сохраняет корректный cron в Settings', async () => {
     const store = await freshStore(1);
-    await setSchedule(store, '0 8 * * 1-5');
+    await setSchedule(store, { cron: '0 8 * * 1-5' });
     expect((await getSettings(store)).schedule_cron).toBe('0 8 * * 1-5');
   });
 
   it('неверный cron отклоняется, пустой — выключает расписание', async () => {
     const store = await freshStore(1);
-    await expect(setSchedule(store, '61 * * *')).rejects.toThrow(SettingsError);
-    await setSchedule(store, '');
+    await expect(setSchedule(store, { cron: '61 * * *' })).rejects.toThrow(SettingsError);
+    await setSchedule(store, { cron: '' });
     expect((await getSettings(store)).schedule_cron).toBe('');
   });
 
@@ -53,5 +54,46 @@ describe('расписание', () => {
     expect(p.next).toHaveLength(2);
     // 07:00 в Торонто зимой = 12:00 UTC
     expect(new Date(p.next[0]!).getUTCHours()).toBe(12);
+  });
+});
+
+describe('включатель автозапуска', () => {
+  it('по умолчанию выключен — после setup кредиты сами не тратятся', async () => {
+    const store = await freshStore(1);
+    expect(store.rowsOf('Settings').find((r) => r.key === 'schedule_enabled')?.value).toBe('FALSE');
+    expect((await getSettings(store)).schedule_enabled).toBe(false);
+  });
+
+  it('включение и выключение пишутся в Settings, cron не теряется', async () => {
+    const store = await freshStore(1);
+    await setSchedule(store, { enabled: true });
+    expect((await getSettings(store)).schedule_enabled).toBe(true);
+    await setSchedule(store, { enabled: false });
+    const s = await getSettings(store);
+    expect(s.schedule_enabled).toBe(false);
+    expect(s.schedule_cron).toBe('0 7 * * *');
+  });
+
+  it('включить с пустым cron нельзя', async () => {
+    const store = await freshStore(1);
+    await expect(setSchedule(store, { cron: '', enabled: true })).rejects.toThrow('empty_cron');
+  });
+
+  it('планировщик: выключено — заданий нет; включено — есть ближайший запуск; выключили — снова нет', async () => {
+    const store = await freshStore(1);
+    let runs = 0;
+    const sch = new Scheduler(store, async () => void runs++, quietLog);
+    await sch.reload();
+    expect(sch.enabled).toBe(false);
+    expect(sch.nextRun()).toBeNull();
+    await setSchedule(store, { enabled: true });
+    await sch.reload();
+    expect(sch.enabled).toBe(true);
+    expect(sch.nextRun()).not.toBeNull();
+    await setSchedule(store, { enabled: false });
+    await sch.reload();
+    expect(sch.enabled).toBe(false);
+    sch.stop();
+    expect(runs).toBe(0);
   });
 });

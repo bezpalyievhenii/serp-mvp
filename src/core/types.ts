@@ -36,6 +36,11 @@ export type Keyword = z.infer<typeof KeywordSchema>;
 
 export const SettingsSchema = z.object({
   schedule_cron: z.string().default('0 7 * * *'),
+  /** Нет ключа или пусто — выключено. */
+  schedule_enabled: z
+    .string()
+    .default('FALSE')
+    .transform((s) => s.trim().toUpperCase() === 'TRUE'),
   timezone: z.string().default('America/Toronto'),
   relabel_days: z.coerce.number().int().min(0).default(30),
   max_run_cost_usd: z.coerce.number().min(0).default(2),

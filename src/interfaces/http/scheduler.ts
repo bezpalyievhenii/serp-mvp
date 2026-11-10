@@ -26,13 +26,13 @@ export class Scheduler {
 
   async reload() {
     const s = await getSettings(this.store);
-    const key = `${s.schedule_cron}|${s.timezone}`;
+    const key = `${s.schedule_enabled}|${s.schedule_cron}|${s.timezone}`;
     if (key === this.current) return;
     this.job?.stop();
     this.job = null;
     this.current = key;
-    if (!s.schedule_cron) {
-      this.log.info('Расписание выключено (schedule_cron пуст)');
+    if (!s.schedule_enabled || !s.schedule_cron) {
+      this.log.info('Автозапуск по расписанию выключен — прогоны только вручную');
       return;
     }
     try {
@@ -44,6 +44,10 @@ export class Scheduler {
     } catch (e) {
       this.log.error(`Неверное расписание «${s.schedule_cron}»: ${(e as Error).message}`);
     }
+  }
+
+  get enabled(): boolean {
+    return this.job !== null;
   }
 
   nextRun(): string | null {

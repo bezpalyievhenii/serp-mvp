@@ -99,12 +99,20 @@
   "schedule.timezone": "Time zone",
   "schedule.next": "Next runs",
   "schedule.invalid": "Invalid expression",
-  "schedule.off": "Leave empty to turn the schedule off",
+  "schedule.off": "Empty field — no schedule",
   "schedule.save": "Save",
-  "schedule.saved": "Saved to the Settings sheet",
+  "schedule.saved": "Schedule saved to the Settings sheet",
   "schedule.presets": "Presets",
   "schedule.preset.daily7": "Every day at 07:00",
   "schedule.preset.twice": "Twice a day (07:00, 19:00)",
   "schedule.preset.weekdays": "Weekdays at 08:00",
-  "schedule.hint": "The scheduler works while npm run serve is running. On a server, use system cron with npm run run (see README)."
+  "schedule.hint": "The scheduler works while npm run serve is running and only when scheduled runs are on. On a server you can use system cron with npm run run instead (see README).",
+  "schedule.autorun": "Scheduled runs",
+  "schedule.on": "On",
+  "schedule.nextRun": "next run",
+  "schedule.offManual": "Off: runs only manually (Runs → Run now, or npm run run). Nothing spends quota or money on its own.",
+  "schedule.ifEnabled": "If you turn scheduled runs on, they will run at",
+  "schedule.enabledToast": "Scheduled runs turned on",
+  "schedule.disabledToast": "Scheduled runs turned off",
+  "schedule.emptyCron": "Set a cron expression first"
 }

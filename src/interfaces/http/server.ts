@@ -115,7 +115,14 @@ export async function startServer(opts: ServerOptions) {
     '/api/schedule',
     wrap(async (_req, res) => {
       const s = await getSettings(store);
-      res.json({ cron: s.schedule_cron, timezone: s.timezone, preview: describeCron(s.schedule_cron, s.timezone), nextRun: scheduler.nextRun() });
+      res.json({
+        cron: s.schedule_cron,
+        enabled: s.schedule_enabled,
+        active: scheduler.enabled,
+        timezone: s.timezone,
+        preview: describeCron(s.schedule_cron, s.timezone),
+        nextRun: scheduler.nextRun(),
+      });
     }),
   );
   app.get(
@@ -128,9 +135,13 @@ export async function startServer(opts: ServerOptions) {
   app.put(
     '/api/schedule',
     wrap(async (req, res) => {
-      const s = await setSchedule(store, String(req.body?.cron ?? ''));
+      const b = req.body ?? {};
+      const s = await setSchedule(store, {
+        cron: typeof b.cron === 'string' ? b.cron : undefined,
+        enabled: typeof b.enabled === 'boolean' ? b.enabled : undefined,
+      });
       await scheduler.reload();
-      res.json({ cron: s.schedule_cron, timezone: s.timezone, nextRun: scheduler.nextRun() });
+      res.json({ cron: s.schedule_cron, enabled: s.schedule_enabled, active: scheduler.enabled, timezone: s.timezone, nextRun: scheduler.nextRun() });
     }),
   );
 
@@ -142,6 +153,12 @@ export async function startServer(opts: ServerOptions) {
 
   const server = app.listen(opts.port, '127.0.0.1', () => {
     log.info(`Интерфейс: http://localhost:${opts.port}${opts.demo ? '  (демо-режим: данные из фикстур, таблица не меняется)' : ''}`);
+  });
+  server.on('error', (e: NodeJS.ErrnoException) => {
+    if (e.code === 'EADDRINUSE') log.error(`Порт ${opts.port} уже занят другой программой. Запустите на другом: PORT=${opts.port + 5} npm run serve`);
+    else log.error(`Сервер не запустился: ${e.message}`);
+    scheduler.stop();
+    process.exit(1);
   });
   return { server, scheduler };
 }

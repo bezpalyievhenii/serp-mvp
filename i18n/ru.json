@@ -99,12 +99,20 @@
   "schedule.timezone": "Часовой пояс",
   "schedule.next": "Ближайшие запуски",
   "schedule.invalid": "Неверное выражение",
-  "schedule.off": "Пустое поле — расписание выключено",
+  "schedule.off": "Пустое поле — расписания нет",
   "schedule.save": "Сохранить",
-  "schedule.saved": "Сохранено в лист Settings",
+  "schedule.saved": "Расписание сохранено в лист Settings",
   "schedule.presets": "Шаблоны",
   "schedule.preset.daily7": "Каждый день в 07:00",
   "schedule.preset.twice": "Дважды в день (07:00, 19:00)",
   "schedule.preset.weekdays": "По будням в 08:00",
-  "schedule.hint": "Планировщик работает, пока запущен npm run serve. На сервере используйте системный cron с npm run run (пример в README)."
+  "schedule.hint": "Планировщик работает, пока запущен npm run serve, и только при включённом автозапуске. На сервере вместо него можно использовать системный cron с npm run run (пример в README).",
+  "schedule.autorun": "Автозапуск по расписанию",
+  "schedule.on": "Включён",
+  "schedule.nextRun": "следующий запуск",
+  "schedule.offManual": "Выключен: прогоны только вручную («Прогоны» → «Запустить сейчас» или npm run run). Квота и деньги сами не тратятся.",
+  "schedule.ifEnabled": "Если включить автозапуск, прогоны будут",
+  "schedule.enabledToast": "Автозапуск включён",
+  "schedule.disabledToast": "Автозапуск выключен",
+  "schedule.emptyCron": "Сначала задайте cron-выражение"
 }

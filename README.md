@@ -17,16 +17,16 @@ cp .env.example .env      # ключи SearchApi и Anthropic, ID таблицы
 npm run doctor            # проверит всё и скажет, что исправить
 npm run setup             # создаст листы, заголовки, настройки и 10 стартовых ключей
 npm run run               # прогон: выдача → Sheets → разметка
-npm run serve             # интерфейс: http://localhost:3000 (без ключей: -- --demo)
+npm run serve             # приложение: http://localhost:3000 (порт занят: PORT=3005; без ключей: -- --demo)
 ```
-Другие команды: `npm test` (офлайн), `npm run export` (CSV + XLSX в `results/`), `npm run run -- --dry-run | --from-cache | --refresh | --no-label | --relabel`. Для сервера — системный cron: `0 7 * * * cd /opt/serp-mvp && npm run run >> run.log 2>&1`.
+Ключи, прогоны, расписание и результаты — в приложении; автозапуск по расписанию по умолчанию выключен и включается во вкладке «Расписание». Другие команды: `npm test` (офлайн), `npm run export` (CSV + XLSX в `results/`), `npm run run -- --dry-run | --from-cache | --refresh | --no-label | --relabel`. Для сервера — системный cron: `0 7 * * * cd /opt/serp-mvp && npm run run >> run.log 2>&1`.
 
 ## 2. Инструменты и почему
 
 - **SearchApi.io** (запасной — **HasData**, переключение `SERP_PROVIDER`): 100 бесплатных запросов без карты, мобильная выдача `gl=ca`. SerpApi не подошёл — регистрация блокирует номера телефонов. Позиции 3–10 SearchApi отдаёт токенами — код разворачивает их бесплатным Resolve API.
 - **Claude** через structured outputs + zod: Haiku 5.5 для тестов (в 20 раз дешевле), Sonnet 5.5 — вариант по умолчанию; модель — одна строка `LLM_MODEL`. Бренды и `is_relevant` проверяет код, а не модель.
-- **Google Sheets** — менеджер видит и правит данные без приложения; доступ только через интерфейс `Store`, поэтому БД встанет без правки ядра.
-- **TypeScript strict + zod + vitest** — всё внешнее валидируется, 100 офлайн-тестов.
+- **Google Sheets** — хранилище, которое без лишней настройки можно открыть и проверить; доступ только через интерфейс `Store`, поэтому БД встанет без правки ядра.
+- **TypeScript strict + zod + vitest** — всё внешнее валидируется, 104 офлайн-теста.
 
 ## 3. Стоимость прогона (из листа `Runs`, 10 ключей)
 
